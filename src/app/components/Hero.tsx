@@ -74,15 +74,15 @@ export function Hero() {
             <motion.div
               variants={itemVariants}
             >
-              <motion.button
-                onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+              <motion.a
+                href="#projects"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 className="inline-flex items-center justify-center h-12 px-6 rounded-xl bg-primary text-primary-foreground hover:opacity-90 transition-opacity text-[15px] font-medium"
               >
                 Изучить мой опыт
                 <ArrowRight className="ml-2 w-4 h-4" />
-              </motion.button>
+              </motion.a>
             </motion.div>
           </motion.div>
 

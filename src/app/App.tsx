@@ -14,8 +14,52 @@ export default function App() {
     document.documentElement.classList.add('dark');
   }, []);
 
+  useEffect(() => {
+    const headerOffset = 80;
+
+    const getScrollPosition = (element: HTMLElement) =>
+      element.getBoundingClientRect().top + window.scrollY - headerOffset;
+
+    const handleAnchorClick = (event: MouseEvent) => {
+      const target = event.target as Element | null;
+      const anchor = target?.closest('a[href^="#"]') as HTMLAnchorElement | null;
+      if (!anchor) return;
+
+      const href = anchor.getAttribute('href');
+      if (!href || href === '#') return;
+
+      const id = decodeURIComponent(href.slice(1));
+      const section = document.getElementById(id);
+      if (!section) return;
+
+      event.preventDefault();
+      window.history.pushState(null, '', `#${id}`);
+      window.scrollTo({
+        top: getScrollPosition(section),
+        behavior: 'smooth',
+      });
+    };
+
+    document.addEventListener('click', handleAnchorClick);
+
+    if (window.location.hash) {
+      const id = decodeURIComponent(window.location.hash.slice(1));
+      const section = document.getElementById(id);
+      if (section) {
+        requestAnimationFrame(() => {
+          window.scrollTo({
+            top: getScrollPosition(section),
+            behavior: 'auto',
+          });
+        });
+      }
+    }
+
+    return () => document.removeEventListener('click', handleAnchorClick);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-background text-foreground antialiased">
+    <div id="top" className="min-h-screen bg-background text-foreground antialiased">
       <ScrollProgress />
       <Header />
       <main>

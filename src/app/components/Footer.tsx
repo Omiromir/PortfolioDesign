@@ -5,20 +5,6 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
   const { ref, isInView } = useInView({ threshold: 0.3 });
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      const offset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-      
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }
-  };
-
   return (
     <footer className="border-t border-border py-12 md:py-16" ref={ref as any}>
       <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-12">
@@ -40,30 +26,18 @@ export function Footer() {
           <div className="md:col-span-5">
             <div className="text-[14px] font-semibold mb-4">Навигация</div>
             <nav className="flex flex-col gap-2.5">
-              <button 
-                onClick={() => scrollToSection('about')}
-                className="text-[14px] text-foreground/60 hover:text-foreground text-left transition-colors"
-              >
+              <a href="#about" className="text-[14px] text-foreground/60 hover:text-foreground text-left transition-colors">
                 Обо мне
-              </button>
-              <button 
-                onClick={() => scrollToSection('expertise')}
-                className="text-[14px] text-foreground/60 hover:text-foreground text-left transition-colors"
-              >
+              </a>
+              <a href="#expertise" className="text-[14px] text-foreground/60 hover:text-foreground text-left transition-colors">
                 Экспертиза
-              </button>
-              <button 
-                onClick={() => scrollToSection('projects')}
-                className="text-[14px] text-foreground/60 hover:text-foreground text-left transition-colors"
-              >
+              </a>
+              <a href="#projects" className="text-[14px] text-foreground/60 hover:text-foreground text-left transition-colors">
                 Проекты
-              </button>
-              <button 
-                onClick={() => scrollToSection('speaking')}
-                className="text-[14px] text-foreground/60 hover:text-foreground text-left transition-colors"
-              >
+              </a>
+              <a href="#speaking" className="text-[14px] text-foreground/60 hover:text-foreground text-left transition-colors">
                 Публичная деятельность
-              </button>
+              </a>
             </nav>
           </div>
         </motion.div>
